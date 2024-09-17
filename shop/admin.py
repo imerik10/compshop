@@ -4,6 +4,8 @@ from django.utils.safestring import mark_safe
 # Register your models here.
 
 admin.site.register(Category)
+admin.site.register(Comments)
+
 
 
 @admin.register(PC)

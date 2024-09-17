@@ -8,10 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <header class="text-gray-400 bg-gray-900 body-font">
+    <header class="text-gray-400 bg-gray-900 body-font" style="background-color: #0c1424;">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-            <img src="{% static 'images/blogs_logo.jpeg' %}" alt="error" style="border-radius: 50%;width: 65px;">
+          <a href="{% url 'home' %}" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+            <img src="{% static 'images/jh.jfif' %}" alt="error" style="border-radius: 50%;width: 65px;">
             <span class="ml-3 text-xl">Comp Shop</span>
           </a>
           {% if user.is_authenticated %}
@@ -41,12 +41,10 @@
 
 
       <footer>
-        <footer class="text-gray-400 bg-gray-900 body-font">
+        <footer class="text-gray-400 bg-gray-900 body-font" style="background-color: #0c1424;">
             <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-              <a class="flex title-font font-medium items-center md:justify-start justify-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
+              <a href="{% url 'home' %}" class="flex title-font font-medium items-center md:justify-start justify-center text-white">
+                <img src="{% static 'images/jh.jfif' %}" alt="error" style="border-radius: 50%;width: 65px;">
                 <span class="ml-3 text-xl">Comp Shop</span>
               </a>
               <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">© 2024 Comp Shop —

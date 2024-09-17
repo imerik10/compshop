@@ -4,23 +4,40 @@
 {% block content %}
 
 <section class="text-gray-400 bg-gray-900 body-font">
-    
-    <div class="container px-5 py-24 mx-auto">
-       
-      <div class="flex flex-wrap -m-4">
-        {% for tovar in tovarlar %}
-        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a href="{% url 'detail' tovar.id %}"><img alt="ecommerce" class="object-cover object-center w-full h-full block" src="{{tovar.image1.url}}"></a>
-          <div class="mt-4">
-            <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{tovar.category}}</h3>
-            <a href="{%url 'detail' tovar.id %}" class="text-white title-font text-lg font-medium">{{tovar.name}}</a>
-            <a href="{%url 'detail' tovar.id %}" class="mt-1">${{tovar.price}}</a>
-          </div>
-        </div>
-        {% endfor %}
+  
+  <div class="container px-5 py-24 mx-auto">
+      <!-- Отображение ссылок на категории -->
+      <div class="mb-6">
+          {% for category in categories %}
+              <a href="{% url 'home' category.slug %}" class="text-white hover:underline">
+                  {{ category.category_name }}
+              </a>
+              {% if not forloop.last %}
+                  |
+              {% endif %}
+          {% endfor %}
+                  | <a href="{% url 'home' %}" class="text-white hover:underline" >All Products</a>
       </div>
-      
-    </div>
 
-  </section>
+      <!-- Отображение отфильтрованных товаров -->
+      <div class="flex flex-wrap -m-4">
+          {% for product in products %}
+              <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+                  <a href="{% url 'detail' product.id %}">
+                      <img alt="ecommerce" class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ product.image1.url }}">
+                  </a>
+                  <div class="mt-4">
+                      <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ product.category.category_name }}</h3>
+                      <a href="{% url 'detail' product.id %}" class="text-white title-font text-lg font-medium">{{ product.name }}</a>
+                      <div></div>
+                      <a href="{% url 'detail' product.id %}" class="mt-1">{{ product.price }} UZS</a>
+                  </div>
+              </div>
+          {% empty %}
+              <p class="text-white">Нет товаров в этой категории.</p>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
 {% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Category(models.Model):
@@ -10,7 +12,6 @@ class Category(models.Model):
     
     def __str__(self):
         return self.category_name
-    
 
 class PC(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
@@ -27,3 +28,16 @@ class PC(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Comments(models.Model):
+    text = models.TextField(verbose_name='Komment text:')
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    tovar = models.ForeignKey(PC,on_delete=models.CASCADE)
+    published_date = models.DateTimeField(auto_now_add=True,verbose_name='Komment shiqqan waqti')
+
+    class Meta:
+        verbose_name = 'Komment'
+        verbose_name_plural = 'Kommentlar'
+
+    def __str__(self):
+        return self.text

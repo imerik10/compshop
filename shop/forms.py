@@ -12,3 +12,17 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fiels = ['username','password']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comments
+        fields = ['text']
+        widgets = {
+            'text':
+            forms.Textarea(
+                attrs={
+                    'class':'form_control',
+                    'rows':3,
+                    'placeholder':'Sizdin comment...'
+                })}
+        labels={'text':''}

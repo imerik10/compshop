@@ -7,12 +7,12 @@
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <div class="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-          <h2 class="text-sm title-font text-gray-500 tracking-widest">{{tovar.author}}</h2>
-          <h1 class="text-white text-3xl title-font font-medium mb-4">{{tovar.book_name}}</h1>
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">{{tovar.category}}</h2>
+          <h1 class="text-white text-3xl title-font font-medium mb-4">{{tovar.name}}</h1>
           <p class="leading-relaxed mb-4">{{tovar.description}}</p>
 
           <div class="flex">
-            <span class="title-font font-medium text-2xl text-white">${{tovar.price}}</span>
+            <span class="title-font font-medium text-2xl text-white">{{tovar.price}} UZS</span>
             <button class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">Купить</button>
             <button class="rounded-full w-10 h-10 bg-gray-800 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
               <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -24,8 +24,80 @@
         <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="{{tovar.image1.url}}">
       </div>
     </div>
+    <div style="
+    display: grid; 
+    place-items: center; /* Центрирование и по горизонтали, и по вертикали */
+    height: 30vh; /* Высота в 30% от высоты экрана */
+    margin: 0; /* Убираем отступы по умолчанию */
+    background-color: #111827; /* Фон для лучшего восприятия */
+">
+    <form action="{% url 'detail' tovar.id %}" method="POST" style="
+        background: #1F2937; /* Более светлый фон для формы */
+        padding: 20px; /* Отступы внутри формы */
+        border-radius: 8px; /* Закругленные углы формы */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для формы */
+        width: 100%;
+        max-width: 800px; /* Увеличенная максимальная ширина формы */
+        display: flex; /* Используем флексбокс для выравнивания элементов */
+        align-items: flex-start; /* Выравнивание элементов по верху */
+        gap: 10px; /* Расстояние между полем ввода и кнопкой */
+    ">
+        <div style="flex-grow: 1;">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+        </div>
+        <input type="submit" value="Coment qosiw" style="
+            background-color: #446280; /* Цвет фона кнопки */
+            color: white; /* Цвет текста кнопки */
+            border: none; /* Убираем границу кнопки */
+            padding: 10px 20px; /* Отступы внутри кнопки */
+            border-radius: 5px; /* Закругленные углы кнопки */
+            cursor: pointer; /* Курсор при наведении */
+            font-size: 16px; /* Размер шрифта кнопки */
+            transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+            align-self: flex-start;
+        ">
+    </form>
+    </div>
+
+<style>
+    form input[type="text"],
+    form textarea {
+        width: calc(100% - 130px);
+        color: #333;
+    }
+    form input[type="text"]::placeholder,
+    form textarea::placeholder {
+        color: #555;
+    }
+</style>
+
+
+
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 1200px; margin: 0 auto;">
+      {% for comment in comments %}
+        <div style="border: 1px solid #ddd; border-radius: 5px; padding: 8px; background-color: #172031; max-width: 100%; box-sizing: border-box;">
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="width: 20px; height: 20px; margin-right: 8px; color: #fafafa;" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <strong style="font-size: 1em; color: #fafafa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ comment.username }}</strong>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; color: #fafafa; line-height: 1.4; max-height: 3.6em; overflow: hidden; text-overflow: ellipsis;" title="{{ comment.text }}">{{ comment.text }}</p>
+          <small style="display: block; color: #777; font-size: 0.8em; text-align: right;">{{ comment.published_date }}</small>
+        </div>
+      {% empty %}
+        <p style="font-style: italic; color: #888; text-align: center; grid-column: span 2;">Комментариев пока нет.</p>
+      {% endfor %}
+    </div>
+    
+
+
+
+    
+
   </section>
-<h1></h1>
 
 
 
